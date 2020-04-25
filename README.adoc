@@ -1,0 +1,17 @@
+= gitea with Asciidoctor
+
+Just as the name implies: The gitea base image, extended with
+the asciidoctor package. To enable
+https://docs.gitea.io/en-us/external-renderers/[asciidoc rendering as external renderer]
+in your gitea installation, append the following to the
+`gitea/conf/app.conf` configuration:
+
+----
+[markup.asciidoc]
+ENABLED = true
+FILE_EXTENSIONS = .adoc,.asciidoc
+RENDER_COMMAND = "asciidoctor -e -a leveloffset=-1 --out-file=- -"
+; Input is not a standard input but a file
+IS_INPUT_FILE = false
+----
+
